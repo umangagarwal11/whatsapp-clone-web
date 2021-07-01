@@ -1,0 +1,27 @@
+.LeftBar{
+  flex:0.4;
+  border-right: 1px solid gray;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatList{
+  display: flex;
+  flex-direction: column;
+  flex:1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.chatList::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 900px){
+  .LeftBar{
+    min-width: 70px;
+    max-width: 70px;
+    flex:0.1;
+  }
+}

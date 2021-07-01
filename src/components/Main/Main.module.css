@@ -1,0 +1,157 @@
+.Main{
+  flex:1;
+  height: 100%;
+}
+
+.overlay{
+  position: relative;
+  top:0;
+  left: 0;
+  height: 100%;
+  background-image: url("https://web.whatsapp.com/img/bg-chat-tile-light_04fcacde539c58cca6745483d4858c52.png");
+  background-repeat: repeat;
+  background-size: 400px;
+}
+
+
+.default{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  background-color: rgba(229, 221, 213,0.9)
+}
+
+.default > p{
+  font-size: 2em;
+}
+
+
+.default > .avatar{
+  object-fit: contain;
+  width: 300px !important;
+  height: 300px !important;
+}
+
+
+.chatView{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgba(229, 221, 213,0.9);
+  overflow-y: scroll;
+}
+
+.chatView::-webkit-scrollbar {
+  display: none;
+}
+
+.chat_top{
+  background-color: #ddd;
+  display: flex;
+  flex: 0.09;
+  padding:0.5% 2%;
+  border-bottom: 1px solid #bbb;
+  align-items: center;
+}
+
+.chat_right{
+  padding: 2%;
+  font-weight: 550;
+}
+
+.chat_main{
+  flex:1;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+}
+
+.chat_bottom{
+  background-color: #ddd;
+  flex:0.08;
+  padding:0.5% 1%;
+  display: flex;
+  border-top: 1px solid #bbb;
+  color: gray;
+  align-items: center;
+}
+
+.chat_bottom> form {
+  display: flex;
+  width:100%; 
+  height:100%;
+  padding:0;
+}
+
+.chat_bottom> form > button{
+  display: none;
+}
+
+.chat_bottom> form > input {
+  outline: none;
+  border: none;
+  background: #eef3f8;
+  padding: 5px 2%;
+  border-radius: 4%/100%;
+  flex:1;
+  margin: 0% 2%;
+  height:70%;
+}
+
+.message_sent{
+  margin: 1%;
+  margin-right:5%;
+  padding: 1%;
+  width: fit-content;
+  max-width: 75%;
+  min-width:7%;
+  background-color: yellowgreen;
+  float:right;
+  border-radius: 7.5px;
+}
+
+.message_sent>span{
+  float: right;
+  margin-top: 5px;
+  font-size: xx-small;
+}
+
+.message_recieved{
+  margin: 1%;
+  margin-left:5%;
+  padding: 1%;
+  width: fit-content;
+  max-width: 75%;
+  min-width:7%;
+  background-color: whitesmoke;
+  border-radius: 7.5px;
+}
+
+.message_recieved>span{  
+  float: right;
+  margin-top: 5px;
+  font-size: xx-small;
+}
+
+@media (max-width:900px) {
+  .message_sent{
+    margin: 2%;
+    padding: 3%;
+    width: fit-content;
+    max-width: 75%;
+    min-width:20%;
+    background-color: yellowgreen;
+  }
+
+  .message_recieved{
+    margin: 2%;
+    padding: 3%;
+    width: fit-content;
+    max-width: 75%;
+    min-width:20%;
+    background-color: whitesmoke;
+  }
+}

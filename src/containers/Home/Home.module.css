@@ -1,0 +1,22 @@
+::-webkit-scrollbar {
+  width: 0%;
+}
+
+.Home{
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 1% 4%;
+  background-color: white;
+  border: 1px solid gray;
+  display: flex;
+}
+
+@media (max-width: 1500px) {
+  .Home{
+    margin: 0;
+  }
+}
