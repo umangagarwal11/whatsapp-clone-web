@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## To Run
+
+Clone this repo, create a firebase project and set up the authentication and firestore for it. Then copy the web-config and paste it in the file src/firebase.
+
+Create a reference to the firebase auth as "auth" and firestore as "db" and export both of them from src/firebase.js
+
 ## Available Scripts
 
 In the project directory, you can run:
