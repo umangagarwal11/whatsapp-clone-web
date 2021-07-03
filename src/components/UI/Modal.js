@@ -61,6 +61,7 @@ export default function SimpleModal(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [users, setUsers] = React.useState([]);
+  const [userChats, setUserChat] = React.useState([]);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -72,6 +73,10 @@ export default function SimpleModal(props) {
           data: doc.data()
         }
       )))
+    })
+
+    db.doc("users/" + user.uid).onSnapshot(doc => {
+      setUserChat(doc.data().chats.map(o => o.chatID))
     })
   },[])
 
@@ -99,7 +104,7 @@ export default function SimpleModal(props) {
   if(props.type==="newChat"){
 
     const userList = users.map(o => {
-      return (o.id === user.uid) ? null : <LeftItem {...o.data} id={o.id} user={user} chatSetter={chatSetter} newchat key={o.id}/>;
+      return (o.id === user.uid) ? null : <LeftItem {...o.data} id={o.id} user={user} chatSetter={chatSetter} newchat key={o.id} userChats = {userChats}/>;
   })
 
     body = (

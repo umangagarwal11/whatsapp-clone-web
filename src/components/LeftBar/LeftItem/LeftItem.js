@@ -7,6 +7,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import SimpleModal from '../../UI/Modal';
 import { db } from '../../../firebase';
 import firebase from 'firebase';
+import moment from 'moment';
 
 function LeftBar(props) {
   const style=[classes.LeftItem];
@@ -31,6 +32,7 @@ function LeftBar(props) {
   }
 
   if (props.chat){
+    const time = new Date(props.timestamp.seconds);
     style.push(classes.chat);
     content = (<Fragment>
                 <Avatar src={props.photoUrl}>{props.displayName[0]}</Avatar>
@@ -38,7 +40,7 @@ function LeftBar(props) {
                   <p style={{'fontWeight': '550'}}>{props.displayName}</p>
                   <p style={{'color': '#555'}}>{(props.last.length>25)?props.last.substring(0,25)+'...':props.last}</p>
                   <span className={classes.timestamp}>
-                    {new Date(props.timestamp.seconds).toLocaleTimeString([],{hour: 'numeric', minute: 'numeric', hour12: true})}
+                      {(time.getDate() === new Date().getDate()) ? moment(time).format("h:mm A") : moment(time).format("DD/MM/YY h:mm A")}
                   </span>
                 </div>
               </Fragment>);
@@ -50,12 +52,14 @@ function LeftBar(props) {
 
     const createNewChat = (reciever,sender) => {
       const id = (reciever>sender) ? (sender + '___' + reciever) : (reciever + '___' + sender);
-      db.collection('users').doc(sender).update({
-        chats: firebase.firestore.FieldValue.arrayUnion({ chatID: id, displayName: props.displayName, reciever: reciever, photoUrl: props.photoUrl, timestamp: {seconds:Date.now()}, last: ""})
-      });
-      db.collection('users').doc(reciever).update({
-        chats: firebase.firestore.FieldValue.arrayUnion({ chatID: id, displayName: props.user.displayName, reciever: sender, photoUrl: props.user.photoUrl, timestamp: { seconds: Date.now() }, last: ""})
-      });
+      if (props.userChats.indexOf(id)===-1){
+        db.collection('users').doc(sender).update({
+          chats: firebase.firestore.FieldValue.arrayUnion({ chatID: id, displayName: props.displayName, reciever: reciever, photoUrl: props.photoUrl, timestamp: {seconds:Date.now()}, last: ""})
+        });
+        db.collection('users').doc(reciever).update({
+          chats: firebase.firestore.FieldValue.arrayUnion({ chatID: id, displayName: props.user.displayName, reciever: sender, photoUrl: props.user.photoUrl, timestamp: { seconds: Date.now() }, last: ""})
+        });
+      }
       props.chatSetter(id,props.photoUrl,props.displayName, reciever);
     }
 

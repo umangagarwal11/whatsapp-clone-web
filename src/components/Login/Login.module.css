@@ -40,3 +40,10 @@
 .login > p{
   margin-top: 10%;
 }
+
+.apk_link{
+  text-decoration: none;
+  color: #008B8B;
+  cursor: pointer;
+  margin-top: 2%;
+}

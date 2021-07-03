@@ -8,6 +8,7 @@ import { selectChat } from '../../features/chatSlice';
 import { selectChatName } from '../../features/chatNameSlice';
 import { db } from '../../firebase';
 import firebase from 'firebase';
+import moment from 'moment';
 
 function Main() {
 
@@ -58,6 +59,10 @@ function Main() {
 
     const sendText = (e) => {
       e.preventDefault();
+
+      if(input.length === 0)
+        return;
+
       db.collection('chatMessages/' + chat + '/messages').add({
         sentBy: user.uid,
         message: input,
@@ -106,20 +111,22 @@ function Main() {
   };
 
   const Chat = () => {
+    
     return <div className={classes.chat_main}>{
       messages.map(o=>{
+        const time = new Date(o.data.timestamp.seconds * 1000);
           //console.log(o);
           return (o.data.sentBy===user.uid)?(
             <div style={{"width":'100%'}} key={o.id}>
               <div className = {classes.message_sent} key={o.id}>
                 {o.data.message}<br></br>
-                <span>{new Date(o.data.timestamp.seconds * 1000).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true })}</span>
+                <span>{(time.getDate() === new Date().getDate()) ? moment(time).format("h:mm A") : moment(time).format("DD/MM/YY h:mm A")}</span>
               </div>
             </div>
           ):(
             <div className={classes.message_recieved} key={o.id}>
               {o.data.message}<br></br>
-                <span>{new Date(o.data.timestamp.seconds * 1000).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true })}</span>
+                <span>{(time.getDate() === new Date().getDate()) ? moment(time).format("h:mm A") : moment(time).format("DD/MM/YY h:mm A")}</span>
             </div>
           )
       })

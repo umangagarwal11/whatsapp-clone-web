@@ -69,6 +69,7 @@ function Login() {
         <button type="submit">Signin</button>
       </form>
       <p>Not a member? <span className={classes.login_register} onClick={register}>Register Now</span></p>
+      <a className={classes.apk_link} href= "https://drive.google.com/file/d/1C77LGw7iAqqLisAFpTCBWp3HLAhg2ZGS/view?usp=sharing">APK for Native Android App</a>
     </div>
   );
 }
